@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudBrowser Dashboard</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+header{
+    height:70px;
+    background:#111827;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.status{
+    background:#1f2937;
+    padding:10px 16px;
+    border-radius:8px;
+}
+
+main{
+    padding:40px;
+}
+
+.card{
+    background:#1f2937;
+    padding:25px;
+    border-radius:12px;
+    max-width:600px;
+}
+
+.online{
+    color:#22c55e;
+}
+
+.offline{
+    color:#ef4444;
+}
+
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+☁️ CloudBrowser
+</div>
+
+<div class="status">
+🔒 Logged In
+</div>
+
+</header>
+
+<main>
+
+<div class="card">
+
+<h2>PC A</h2>
+
+<br>
+
+<p>
+Status:
+<span id="pcStatus" class="offline">
+🔴 Offline
+</span>
+</p>
+
+<br>
+
+<button onclick="connectToPc()">
+Connect
+</button>
+
+</div>
+
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+
+const socket = io();
+
+const status = document.getElementById("pcStatus");
+
+socket.on("status", (data) => {
+
+    if(data.online){
+
+        status.innerHTML = "🟢 Online";
+        status.className = "online";
+
+    }else{
+
+        status.innerHTML = "🔴 Offline";
+        status.className = "offline";
+
+    }
+
+});
+
+function connectToPc(){
+
+    socket.emit("start-session");
+
+}
+
+socket.on("session-started", ()=>{
+
+    alert("✅ Connected to PC A!");
+
+});
+
+</script>
+
+</body>
+</html>

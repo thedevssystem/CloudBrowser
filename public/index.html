@@ -6,11 +6,16 @@
     <title>CloudBrowser</title>
 
     <style>
-        body{
+        *{
             margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,Helvetica,sans-serif;
+        }
+
+        body{
             background:#111827;
             color:white;
-            font-family:Arial,Helvetica,sans-serif;
             display:flex;
             justify-content:center;
             align-items:center;
@@ -26,19 +31,27 @@
             box-shadow:0 0 25px rgba(0,0,0,.4);
         }
 
+        h1{
+            margin-bottom:10px;
+        }
+
+        p{
+            color:#cbd5e1;
+            margin-bottom:20px;
+        }
+
         input{
             width:100%;
             padding:12px;
-            margin-top:20px;
             border:none;
             border-radius:8px;
-            box-sizing:border-box;
+            margin-bottom:15px;
+            outline:none;
         }
 
         button{
             width:100%;
             padding:12px;
-            margin-top:15px;
             border:none;
             border-radius:8px;
             background:#2563eb;
@@ -50,25 +63,71 @@
         button:hover{
             background:#1d4ed8;
         }
+
+        #error{
+            margin-top:15px;
+            color:#ef4444;
+            display:none;
+        }
     </style>
 </head>
+
 <body>
 
 <div class="card">
 
-    <h1>CloudBrowser</h1>
+    <h1>☁️ CloudBrowser</h1>
 
     <p>Secure Remote Browser</p>
 
     <input
+        id="password"
         type="password"
         placeholder="Enter Password">
 
-    <button>
+    <button onclick="login()">
         Connect
     </button>
 
+    <div id="error">
+        Wrong password.
+    </div>
+
 </div>
+
+<script>
+
+async function login(){
+
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("/login",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            password
+        })
+
+    });
+
+    if(response.ok){
+
+        window.location="/dashboard";
+
+    }else{
+
+        document.getElementById("error").style.display="block";
+
+    }
+
+}
+
+</script>
 
 </body>
 </html>

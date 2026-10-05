@@ -1,0 +1,8 @@
+2026/07/14-18:52:34.551 2240 Reusing MANIFEST C:\Users\Yad Wiso\OneDrive\Documents\Desktop\CloudBrowser\agent\profiles\Guest\Default\Local Storage\leveldb/MANIFEST-000001
+2026/07/14-18:52:34.572 2240 Recovering log #3
+2026/07/14-18:52:34.573 2240 Level-0 table #3: started
+2026/07/14-18:52:34.624 2240 Level-0 table #3: 58235 bytes OK
+2026/07/14-18:52:34.625 2240 Recovering log #4
+2026/07/14-18:52:34.634 2240 Reusing old log C:\Users\Yad Wiso\OneDrive\Documents\Desktop\CloudBrowser\agent\profiles\Guest\Default\Local Storage\leveldb/000004.log 
+2026/07/14-18:52:34.638 2240 Delete type=0 #3
+2026/07/14-18:52:34.639 2240 Delete type=2 #5
